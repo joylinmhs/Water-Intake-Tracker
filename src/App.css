@@ -1,42 +1,120 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.app {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #f8fbff, #eef5ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.card {
+  width: 320px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
 }
 
-@keyframes logo-spin {
+.subtitle {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.bottle-area {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.bottle {
+  width: 80px;
+  height: 200px;
+  border: 3px solid #cfe6ff;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.water {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 0%;
+  background: linear-gradient(180deg, #7ec8e3, #4da6ff);
+  transition: height 0.6s ease;
+  overflow: hidden;
+}
+
+.water::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: -50%;
+  width: 200%;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  animation: wave 3s linear infinite;
+}
+
+@keyframes wave {
   from {
-    transform: rotate(0deg);
+    transform: translateX(0%);
   }
+
   to {
-    transform: rotate(360deg);
+    transform: translateX(100%);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+.count {
+  margin: 16px 0;
+  font-size: 16px;
+  color: #444;
 }
 
-.card {
-  padding: 2em;
+.drink-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: #4da6ff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.drink-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(77, 166, 255, 0.4);
+}
+
+.drink-btn:disabled {
+  background: #b9d9ff;
+  cursor: default;
+  box-shadow: none;
+}
+
+.reset-btn {
+  margin-top: 12px;
+  background: transparent;
+  border: none;
+  color: #18418e;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  text-decoration: underline;
 }

@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  // ✅ 1. Load saved value
+  const [glasses, setGlasses] = useState<number>(() => {
+    return Number(localStorage.getItem("glasses")) || 0;
+  });
+
+  const totalGlasses = 8;
+
+  // ✅ 2. Save whenever glasses change
+  useEffect(() => {
+    localStorage.setItem("glasses", String(glasses));
+  }, [glasses]);
+
+  const handleDrink = () => {
+    if (glasses < totalGlasses) {
+      setGlasses(glasses + 1);
+    }
+  };
+
+  const waterHeight = (glasses / totalGlasses) * 100;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+    <div className="app">
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+        <h1 className="title">Water Intake</h1>
+        <p className="subtitle">Drink gently. Stay hydrated.</p>
+
+        <div className="bottle-area">
+          <div className="bottle">
+            <div
+              className="water"
+              style={{ height: `${waterHeight}%` }}
+            />
+          </div>
+        </div>
+
+        <p className="count">
+          {glasses} / {totalGlasses} glasses
         </p>
+
+        <button
+          className="drink-btn"
+          onClick={handleDrink}
+          disabled={glasses === totalGlasses}
+        >
+          {glasses === totalGlasses
+            ? "You're hydrated 💙"
+            : "+ I drank water"}
+        </button>
+
+        {/* 🔄 Reset button */}
+        <button
+          className="reset-btn"
+          onClick={() => setGlasses(0)}
+        >
+          Reset
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
+
 }
 
-export default App
+export default App;
