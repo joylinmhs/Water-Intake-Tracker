@@ -2,16 +2,22 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  // ✅ 1. Load saved value
-  const [glasses, setGlasses] = useState<number>(() => {
-    return Number(localStorage.getItem("glasses")) || 0;
-  });
-
   const totalGlasses = 8;
 
-  // ✅ 2. Save whenever glasses change
+  // 🌅 Daily-aware state
+  const [glasses, setGlasses] = useState<number>(() => {
+    const saved = Number(localStorage.getItem("glasses")) || 0;
+    const savedDate = localStorage.getItem("lastDate");
+    const today = new Date().toDateString();
+
+    return savedDate === today ? saved : 0;
+  });
+
+  // 💾 Persist state
   useEffect(() => {
+    const today = new Date().toDateString();
     localStorage.setItem("glasses", String(glasses));
+    localStorage.setItem("lastDate", today);
   }, [glasses]);
 
   const handleDrink = () => {
@@ -24,9 +30,22 @@ function App() {
 
   return (
     <div className="app">
+      {/* 🌫️ Floating bubbles */}
+      <div className="bubbles">
+        <span className="bubble b1" />
+        <span className="bubble b2" />
+        <span className="bubble b3" />
+        <span className="bubble b4" />
+      </div>
+
       <div className="card">
         <h1 className="title">Water Intake</h1>
-        <p className="subtitle">Drink gently. Stay hydrated.</p>
+
+        <p className="subtitle">
+          {glasses === totalGlasses
+            ? "All set for today ✨"
+            : "Drink gently. Stay hydrated."}
+        </p>
 
         <div className="bottle-area">
           <div className="bottle">
@@ -51,7 +70,6 @@ function App() {
             : "+ I drank water"}
         </button>
 
-        {/* 🔄 Reset button */}
         <button
           className="reset-btn"
           onClick={() => setGlasses(0)}
@@ -61,7 +79,6 @@ function App() {
       </div>
     </div>
   );
-
 }
 
 export default App;
