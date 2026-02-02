@@ -41,6 +41,15 @@ function App() {
       <div className="card">
         <h1 className="title">Water Intake</h1>
 
+        <p className="date">
+          Today • {new Date().toLocaleDateString()}
+        </p>
+
+        <p className="goal">
+          Goal: {totalGlasses} glasses
+        </p>
+
+
         <p className="subtitle">
           {glasses === totalGlasses
             ? "All set for today ✨"
