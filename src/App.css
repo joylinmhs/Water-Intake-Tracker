@@ -206,3 +206,36 @@
 .goal-options button:hover {
   background: #e9f2ff;
 }
+
+.goal-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.goal-card {
+  padding: 16px 12px;
+  border-radius: 18px;
+  background: #f4f9ff;
+  border: 1px solid #cfe6ff;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.goal-card h3 {
+  font-size: 18px;
+  color: #2563eb;
+  margin-bottom: 4px;
+}
+
+.goal-card p {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.goal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.15);
+}

@@ -59,9 +59,20 @@ function App() {
           <p className="subtitle">Choose your goal for today</p>
 
           <div className="goal-options">
-            <button onClick={() => setDailyGoal(2000)}>2 L</button>
-            <button onClick={() => setDailyGoal(2500)}>2.5 L</button>
-            <button onClick={() => setDailyGoal(3000)}>3 L</button>
+            <div className="goal-card" onClick={() => setDailyGoal(2000)}>
+              <h3>2 L</h3>
+              <p>Light</p>
+            </div>
+
+            <div className="goal-card" onClick={() => setDailyGoal(2500)}>
+              <h3>2.5 L</h3>
+              <p>Recommended</p>
+            </div>
+
+            <div className="goal-card" onClick={() => setDailyGoal(3000)}>
+              <h3>3 L</h3>
+              <p>Active</p>
+            </div>
           </div>
         </div>
       </div>
