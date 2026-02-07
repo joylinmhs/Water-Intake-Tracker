@@ -59,17 +59,26 @@ function App() {
           <p className="subtitle">Choose your goal for today</p>
 
           <div className="goal-options">
-            <div className="goal-card" onClick={() => setDailyGoal(2000)}>
+            <div
+              className={`goal-card ${dailyGoal === 2000 ? "active" : ""}`}
+              onClick={() => setDailyGoal(2000)}
+            >
               <h3>2 L</h3>
               <p>Light</p>
             </div>
 
-            <div className="goal-card" onClick={() => setDailyGoal(2500)}>
+            <div
+              className={`goal-card ${dailyGoal === 2500 ? "active" : ""}`}
+              onClick={() => setDailyGoal(2500)}
+            >
               <h3>2.5 L</h3>
               <p>Recommended</p>
             </div>
 
-            <div className="goal-card" onClick={() => setDailyGoal(3000)}>
+            <div
+              className={`goal-card ${dailyGoal === 3000 ? "active" : ""}`}
+              onClick={() => setDailyGoal(3000)}
+            >
               <h3>3 L</h3>
               <p>Active</p>
             </div>
