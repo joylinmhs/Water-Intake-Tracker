@@ -249,3 +249,37 @@
 .goal-card.active h3 {
   color: #3d1eaf;
 }
+
+.theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* 🌙 Night mode */
+.app.dark {
+  background: linear-gradient(180deg, #0f172a, #020617);
+}
+
+.app.dark .card {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+.app.dark .subtitle,
+.app.dark .count {
+  color: #9ca3af;
+}
+
+.app.dark .goal-card {
+  background: #020617;
+  border-color: #334155;
+}
+
+.app.dark .goal-card.active {
+  background: #0f172a;
+}
