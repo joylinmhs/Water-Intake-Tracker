@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    return localStorage.getItem("darkMode") === "true";
+  });
+
   const DRINK_ML = 250;
 
   // 🌅 Load daily goal (ml)
@@ -32,6 +36,11 @@ function App() {
     }
   }, [dailyGoal]);
 
+  // 💾 Persist dark mode
+  useEffect(() => {
+    localStorage.setItem("darkMode", String(darkMode));
+  }, [darkMode]);
+
   const handleDrink = () => {
     if (dailyGoal && intake < dailyGoal) {
       setIntake(Math.min(intake + DRINK_ML, dailyGoal));
@@ -44,17 +53,23 @@ function App() {
     localStorage.removeItem("dailyGoal");
   };
 
-  // % fill for bottle
   const waterHeight =
     dailyGoal ? (intake / dailyGoal) * 100 : 0;
 
   // ─────────────────────────────────────────────
-
   // 🌱 GOAL SELECTION SCREEN
   if (dailyGoal === null) {
     return (
-      <div className="app">
+      <div className={`app ${darkMode ? "dark" : ""}`}>
         <div className="card">
+          {/* 🌙 Toggle ONLY here */}
+          <button
+            className="theme-toggle"
+            onClick={() => setDarkMode(!darkMode)}
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
+
           <h1 className="title">Water Intake</h1>
           <p className="subtitle">Choose your goal for today</p>
 
@@ -88,10 +103,10 @@ function App() {
     );
   }
 
-  // 🌊 TRACKING SCREEN
+  // ─────────────────────────────────────────────
+  // 🌊 TRACKING SCREEN (inherits dark mode)
   return (
-    <div className="app">
-      {/* 🌫️ Floating bubbles */}
+    <div className={`app ${darkMode ? "dark" : ""}`}>
       <div className="bubbles">
         <span className="bubble b1" />
         <span className="bubble b2" />
