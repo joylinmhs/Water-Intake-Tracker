@@ -8,6 +8,11 @@ function App() {
 
   const DRINK_ML = 250;
 
+  const [drinkAmount, setDrinkAmount] = useState<number>(() => {
+    return Number(localStorage.getItem("drinkAmount")) || 250;
+  });
+
+
   // 🌅 Load daily goal (ml)
   const [dailyGoal, setDailyGoal] = useState<number | null>(() => {
     const savedGoal = localStorage.getItem("dailyGoal");
@@ -29,6 +34,11 @@ function App() {
     localStorage.setItem("lastDate", today);
   }, [intake]);
 
+  useEffect(() => {
+    localStorage.setItem("drinkAmount", String(drinkAmount));
+  }, [drinkAmount]);
+
+
   // 💾 Persist goal
   useEffect(() => {
     if (dailyGoal !== null) {
@@ -43,9 +53,10 @@ function App() {
 
   const handleDrink = () => {
     if (dailyGoal && intake < dailyGoal) {
-      setIntake(Math.min(intake + DRINK_ML, dailyGoal));
+      setIntake(Math.min(intake + drinkAmount, dailyGoal));
     }
   };
+
 
   const resetAll = () => {
     setIntake(0);
@@ -135,6 +146,18 @@ function App() {
           {(dailyGoal / 1000).toFixed(1)} L
         </p>
 
+        <div className="drink-options">
+          {[200, 250, 500].map((amount) => (
+            <button
+              key={amount}
+              className={`drink-option ${drinkAmount === amount ? "active" : ""
+                }`}
+              onClick={() => setDrinkAmount(amount)}
+            >
+              + {amount} ml
+            </button>
+          ))}
+        </div>
         <button
           className="drink-btn"
           onClick={handleDrink}
