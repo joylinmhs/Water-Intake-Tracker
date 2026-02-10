@@ -165,7 +165,7 @@ function App() {
         >
           {intake === dailyGoal
             ? "All set for today 💙"
-            : "+ 250 ml"}
+            : `+ ${drinkAmount} ml`}
         </button>
 
         <button className="reset-btn" onClick={resetAll}>
